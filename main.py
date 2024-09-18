@@ -19,10 +19,9 @@ def extract_blocks(frame, k):
     '''
     fy, fx, channels = frame.shape
     block_size = 2 * k + 1
-    # 计算横向和纵向可以完整划分的块数量
+    # compute number of blocks
     num_blocks_y = fy // block_size
     num_blocks_x = fx // block_size
-    # 创建一个三维数组来存储块
     blocks = np.zeros((num_blocks_y, num_blocks_x, block_size, block_size, channels), dtype=frame.dtype)
     
     for i, y in enumerate(range(0, fy - block_size + 1, block_size)):
@@ -46,13 +45,9 @@ def process_video_frames(frames, k):
     return all_frames_blocks
 
 def calculate_ssd(block1, block2):
-    # 计算差值
     diff = block1 - block2
-    # 平方差
     squared_diff = np.square(diff)
-    # 求和
     ssd = np.sum(squared_diff)
-    # 开方
     root_ssd = np.sqrt(ssd)
     return root_ssd
 

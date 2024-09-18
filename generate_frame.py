@@ -23,12 +23,10 @@ print(f"Extracted frames blocks shape: {frames_blocks.shape}")
 frame_idx = 86
 mapping = find_best_match(frames_blocks, frame_idx)
 img_with_arrows = draw_arrow_in_frame(frames_blocks, frame_idx, mapping)
-# 展示当前帧包含箭头的图像
 cv2.imshow("Frame with Motion Arrows", img_with_arrows)
-cv2.waitKey(0)  # 等待用户按键
-# 展示下一帧的图像
+cv2.waitKey(0)
 if frame_idx + 1 < len(frames):
-    next_frame_img = frames[frame_idx + 1]  # 直接获取下一帧的图像
+    next_frame_img = frames[frame_idx + 1]
     cv2.imshow("Next Frame", next_frame_img)
-    cv2.waitKey(0)  # 等待用户按键
+    cv2.waitKey(0)
 cv2.destroyAllWindows()

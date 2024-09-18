@@ -20,17 +20,16 @@ frames = load_video_frames(video_path)  # Load video frames
 frames_blocks = process_video_frames(frames, k)  # Process frames to blocks
 print(f"Extracted frames blocks shape: {frames_blocks.shape}")
 
-# 创建输出文件夹
+# Create output
 output_dir = 'output'
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-for frame_idx in range(0, min(1000, len(frames_blocks))):  # 确保不超出总帧数
+for frame_idx in range(0, min(1000, len(frames_blocks))):
     print(f'currently processing frame {frame_idx}')
-    if frame_idx < len(frames_blocks) - 1:  # 确保有下一帧可用于映射
+    if frame_idx < len(frames_blocks) - 1:
         mapping = find_best_match(frames_blocks, frame_idx)
         img_with_arrows = draw_arrow_in_frame(frames_blocks, frame_idx, mapping)
-        # 保存带箭头的图像到文件
         cv2.imwrite(os.path.join(output_dir, f'frame_{frame_idx:03d}.png'), img_with_arrows)
     else:
         break
